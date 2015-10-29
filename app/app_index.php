@@ -9,6 +9,7 @@ class pageIndex extends pageTemplate{
 	*/
 	public function get(){
 		$this->createHeader();
+		$this->createBody();
 		$this->createFooter();
 	}
 	/**
@@ -18,7 +19,16 @@ class pageIndex extends pageTemplate{
 	*/
 	public function post(){
 		$this->createHeader();
+		$this->createBody();
 		$this->createFooter();
+	}
+
+	/**
+	* @Overrides 	pageTemplate's createBody function
+	* @brief 		Creates the page's container
+	*/
+	public function createBody(){
+
 	}
 
 }
