@@ -1,13 +1,20 @@
 <!doctype html>
-<?php require_once("inc/include.php"); ?>
+<?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+?>
 <html>
 <head>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 <?php
-
-
+include("inc/include.php"); 
+$main = new main();
 
 ?>
 </body>

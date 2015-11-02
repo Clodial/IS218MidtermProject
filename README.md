@@ -7,4 +7,5 @@ Assignment Goals:
       - 1 page for showing the information in a CSV file
       - 1 page for showing individual parts of the CSV file
       - 1 page for Updating parts of the CSV file
+      - 1 page for adding to CSV files
       

@@ -6,7 +6,6 @@ class main{
 	*/
 
 	private $cCsvArray = [];
-	private $cPageArray = [];
 
 	/**
 	* @brief 	create the constructor for the web app
@@ -14,19 +13,16 @@ class main{
 	*			-> figure out what page to load
 	*/
 	public function __construct(){
-	
-		array_push($his->cPageArray, 'indexPage'); //Default index page
 
-		$page_request = 'indexPage';
+		$page_request = 'pageIndex';
 		
-		if(!empty($_REQUEST)){
+		if(!empty($_REQUEST) && isset($_REQUEST['page'])){
 
 			$page_request = $_REQUEST['page'];
-			if(!in_array($_REQUEST['page'], $this->cPageArray))
-		
+			
 		}
 
-		$page = new $page_request;
+		$page = new $page_request();
 		
 		if($_SERVER['REQUEST_METHOD'] == 'GET'){
 			

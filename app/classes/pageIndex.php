@@ -1,5 +1,4 @@
-<?php
-include("app/app_page.php");
+<?php 
 class pageIndex extends pageTemplate{
 
 	/**
@@ -28,8 +27,16 @@ class pageIndex extends pageTemplate{
 	* @brief 		Creates the page's container
 	*/
 	public function createBody(){
-
+		if(!file_exists('files/names.csv')){
+			$this->createCSV('names');
+		}
+		echo '<form method="post">';
+		echo '	<button type="submit" name="page" value="pageShow">Show Data</button>';
+		echo '	<button type="submit" name="page" value="pageAdd">Add Entry</button>';
+		echo '</form>';
 	}
+
+
 
 }
 	
