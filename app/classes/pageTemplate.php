@@ -8,11 +8,6 @@ class pageTemplate{
 	*/
 
 	/**
-	* @brief 	what runs when get values are detected from server
-	*/
-	public function get(){}
-
-	/**
 	* @brief 	what runs when post values are detected from server
 	*/
 	public function post(){}
@@ -44,6 +39,10 @@ class pageTemplate{
 	public function readCSV($file){
 		$locArray = array();
 		$i = 0;
+		if(!file_exists($file)){
+			$this->createCSV('names');
+			$file = $this->getCSVFile();
+		}
 		$locHandle = fopen($file, 'r');
 		while(($row = fgetcsv($locHandle, 1024)) !== false){
 			foreach($row as $k=> $value){
@@ -59,8 +58,8 @@ class pageTemplate{
 	* @brief 	creates a CSV file
 	* @param 	$fileName -> the name of the file to be created
 	*/
-	public function createCSV($fileName){
-		$file = fopen('files/'. $fileName .'.csv', 'w');
+	public static function createCSV($fileName){
+		$file = fopen('files/' . $fileName .'.csv', 'w');
 		fputcsv($file, $locArray);
 		fclose($file);
 	}
@@ -74,6 +73,10 @@ class pageTemplate{
 	public function writeCSV($file, $array){
 		$tempFile = fopen('files/temp.csv', 'a');
 		$i = 0;
+		if(!file_exists($file)){
+			$this->createCSV($csv);
+			$file = $this->getCSVFile();
+		}
 		$tempArray = $this->readCSV($file);
 		$temp2Array = array();
 		$retArray = array();
@@ -93,7 +96,7 @@ class pageTemplate{
 			fputcsv($tempFile, $next);
 		}
 
-		rename('files/temp.csv', 'files/names.csv');
+		rename('files/temp.csv', $file);
 	}
 
 	/**
@@ -105,6 +108,10 @@ class pageTemplate{
 		echo $index;
 		$deleted = 0;
 		$tempFile = fopen('files/temp.csv', 'a');
+		if(!file_exists($file)){
+			$this->createCSV('names');
+			$file = $this->getCSVFile();
+		}
 		$tempArray = $this->readCSV($file);
 		$temp2Array = array();
 		foreach($tempArray as $row=>$next){
@@ -122,11 +129,20 @@ class pageTemplate{
 		foreach($temp2Array as $row=>$next){
 			fputcsv($tempFile, $next);
 		}
-		rename('files/temp.csv', 'files/names.csv');
+		rename('files/temp.csv', $file);
 	}
 
+	/**
+	* @brief edit the CSV file based on the given array
+	* @param $file -> file to be edited
+	* @param $array -> array with index to change
+	*/
 	public function updateCSV($file, $array){
 		$tempFile = fopen('files/temp.csv', 'a');
+		if(!file_exists($file)){
+			$this->createCSV('names');
+			$file = $this->getCSVFile();
+		}
 		$tempArray = $this->readCSV($file);
 		$temp2Array = array();
 		foreach($tempArray as $row=>$next){
@@ -140,11 +156,19 @@ class pageTemplate{
 		foreach($temp2Array as $row=>$next){
 			fputcsv($tempFile, $next);
 		}
-		rename('files/temp.csv', 'files/names.csv');
+		rename('files/temp.csv', $file);
 	}
 
+	/**
+	* @brief get access to the CSV file
+	* @return the csv file associated with the program
+	*/
 	public function getCSVFile(){
+		if(!file_exists($this->csv)){
+			$this->createCSV('names');
+		}
 		return $this->csv;
 	}
+
 }
 ?>

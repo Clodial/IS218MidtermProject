@@ -14,7 +14,7 @@ class main{
 	*/
 	public function __construct(){
 
-		$page_request = 'pageIndex';
+		$page_request = 'pageShow';
 		
 		if(!empty($_REQUEST) && isset($_REQUEST['page'])){
 
@@ -23,17 +23,9 @@ class main{
 		}
 
 		$page = new $page_request();
+
+		$page->post();
 		
-		if($_SERVER['REQUEST_METHOD'] == 'GET'){
-			
-			$page->get();
-
-		}else{
-
-			$page->post();
-
-		}
-
 	}
 
 }

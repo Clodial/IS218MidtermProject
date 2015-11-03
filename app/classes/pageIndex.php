@@ -2,16 +2,6 @@
 class pageIndex extends pageTemplate{
 
 	/**
-	* @Overrides 	pageTemplate's get function
-	* @brief 	 	Creates the web application based on information
-	*				obtained via method=GET
-	*/
-	public function get(){
-		$this->createHeader();
-		$this->createBody();
-		$this->createFooter();
-	}
-	/**
 	* @Overrides 	pageTemplate's post function
 	* @brief 	 	Creates the web application based on information
 	*				obtained via method=POST
@@ -27,9 +17,7 @@ class pageIndex extends pageTemplate{
 	* @brief 		Creates the page's container
 	*/
 	public function createBody(){
-		if(!file_exists('files/names.csv')){
-			$this->createCSV('names');
-		}
+		echo '<h3 class="jumbotron">Welcome!</h3>';
 		echo '<form method="post">';
 		echo '	<button type="submit" name="page" value="pageShow">Show Data</button>';
 		echo '	<button type="submit" name="page" value="pageAdd">Add Entry</button>';

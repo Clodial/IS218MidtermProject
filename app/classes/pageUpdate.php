@@ -7,12 +7,6 @@ class pageUpdate extends pageTemplate{
 	private $email;
 
 	/**
-	* @Overrides pageTemplate's get function
-	*/
-	public function get(){
-
-	}
-	/**
 	* @Overrides pageTemplate's post function
 	*/
 	public function post(){
@@ -21,6 +15,7 @@ class pageUpdate extends pageTemplate{
 
 	public function createBody(){
 		if(isset($_REQUEST['index']) && !isset($_REQUEST['delete']) && !isset($_REQUEST['first']) && !isset($_REQUEST['last']) && !isset($_REQUEST['email'])){
+			echo '<h3 class="jumbotron">Update Data</h3>';
 			$this->index = $_REQUEST['index'];
 			$csvArray = $this->readCSV($this->getCSVFile());
 			foreach($csvArray as $row=>$next){
@@ -32,12 +27,14 @@ class pageUpdate extends pageTemplate{
 			}
 			$this->makeForm($this->first, $this->last, $this->email);
 		}else if(isset($_REQUEST['first']) && isset($_REQUEST['last']) && isset($_REQUEST['email'])){
+			echo '<h3 class="jumbotron">Update Data</h3>';
 			if(isset($_REQUEST['index'])){
 				$locArray = array($_REQUEST['index'], $_REQUEST['first'], $_REQUEST['last'], $_REQUEST['email']);
 				$this->updateCSV($this->getCSVFile(), $locArray);
 				$this->makeForm($_REQUEST['first'], $_REQUEST['last'], $_REQUEST['email']);
 			}
 		}else if(isset($_REQUEST['delete']) && $_REQUEST['delete'] == 'true' && isset($_REQUEST['index']) && $_REQUEST['index'] >= 0){
+			echo '<h3 class="jumbotron">Delete Data</h3>';
 			$this->index = $_REQUEST['index'];
 			$this->deleteCSV($this->getCSVFile(), $this->index);
 			$this->showDelete();
@@ -56,7 +53,7 @@ class pageUpdate extends pageTemplate{
 		echo ' 	<button type="submit" value="pageUpdate" name="page">Update</button>';
 		echo '</form></br>';
 		echo '<form method="post">';
-		echo ' 	<button type="submit" value="pageIndex" name="page">Back to Main Menu</button>';
+		echo ' 	<button type="submit" value="pageShow" name="page">Back to Records</button>';
 		echo '</form></br>';
 		echo '<form method="post">';
 		echo '	<input type="hidden" name="index" value="' . $_REQUEST['index'] . '">';
@@ -64,10 +61,11 @@ class pageUpdate extends pageTemplate{
 		echo ' 	<button type="submit" value="pageUpdate" name="page">Delete Record</button>';
 		echo '</form>';
 	}
+
 	public function showDelete(){
 		echo 'item deleted';
 		echo '<form method="post">';
-		echo ' 	<button type="submit" value="pageIndex" name="page">Back to Main Menu</button>';
+		echo ' 	<button type="submit" value="pageAdd" name="page">Add Records</button>';
 		echo '	<button type="submit" value="pageShow" name="page">Check Results</button>';
 		echo '</form></br>';
 	}

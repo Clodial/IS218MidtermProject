@@ -22,7 +22,6 @@ class person{
 		echo '<div class="col-md-4"> First Name: ' . $this->first . '</div>';
 		echo '<div class="col-md-4"> Last Name: ' . $this->last . '</div>';
 		echo '<div class="col-md-4"> Email: ' . $this->email . '</div>';
-		echo 'click to edit';
 		echo '</button>';
 		echo '</form>';
 	}
