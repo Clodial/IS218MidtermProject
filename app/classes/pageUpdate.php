@@ -43,7 +43,7 @@ class pageUpdate extends pageTemplate{
 			echo '<h3 class="jumbotron">Delete Data</h3>';
 			$this->index = $_REQUEST['index'];
 			$this->deleteCSV($this->getCSVFile(), $this->index);
-			$this->showDelete();
+			$this->showDelete($type);
 		}else{
 			echo 'Stop hacking, hacker. Hacking is bad. Stop it. Please?';
 		}
@@ -60,17 +60,17 @@ class pageUpdate extends pageTemplate{
 		echo '	Email<input type="text" name="email" required></br>';
 		echo ' 	<button type="submit" value="pageUpdate" name="page">Update</button>';
 		echo '</form></br>';
-		echo '<form method="' . $type .'">';
+		echo '<form method="post">';
 		echo ' 	<button type="submit" value="pageShow" name="page">Back to Records</button>';
 		echo '</form></br>';
-		echo '<form method="' . $type .'">';
+		echo '<form method="post">';
 		echo '	<input type="hidden" name="index" value="' . $_REQUEST['index'] . '">';
 		echo '	<input type="hidden" name="delete" value="true">';
 		echo ' 	<button type="submit" value="pageUpdate" name="page">Delete Record</button>';
 		echo '</form>';
 	}
 
-	public function showDelete(){
+	public function showDelete($type){
 		echo 'item deleted';
 		echo '<form method="' . $type .'">';
 		echo ' 	<button type="submit" value="pageAdd" name="page">Add Records</button>';
