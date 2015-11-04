@@ -24,7 +24,11 @@ class main{
 
 		$page = new $page_request();
 
-		$page->post();
+		if($_SERVER['REQUEST_METHOD'] == "GET"){
+			$page->get();
+		}else{
+			$page->post();
+		}
 		
 	}
 

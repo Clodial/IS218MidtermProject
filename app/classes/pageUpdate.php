@@ -9,11 +9,17 @@ class pageUpdate extends pageTemplate{
 	/**
 	* @Overrides pageTemplate's post function
 	*/
+	public function get(){
+		$this->createBody('get');
+	}
+	/**
+	* @Overrides pageTemplate's post function
+	*/
 	public function post(){
-		$this->createBody();
+		$this->createBody('post');
 	}
 
-	public function createBody(){
+	public function createBody($type){
 		if(isset($_REQUEST['index']) && !isset($_REQUEST['delete']) && !isset($_REQUEST['first']) && !isset($_REQUEST['last']) && !isset($_REQUEST['email'])){
 			echo '<h3 class="jumbotron">Update Data</h3>';
 			$this->index = $_REQUEST['index'];
@@ -25,7 +31,7 @@ class pageUpdate extends pageTemplate{
 					$this->email = $next[3];
 				}
 			}
-			$this->makeForm($this->first, $this->last, $this->email);
+			$this->makeForm($this->first, $this->last, $this->email, $type);
 		}else if(isset($_REQUEST['first']) && isset($_REQUEST['last']) && isset($_REQUEST['email'])){
 			echo '<h3 class="jumbotron">Update Data</h3>';
 			if(isset($_REQUEST['index'])){
@@ -38,24 +44,26 @@ class pageUpdate extends pageTemplate{
 			$this->index = $_REQUEST['index'];
 			$this->deleteCSV($this->getCSVFile(), $this->index);
 			$this->showDelete();
+		}else{
+			echo 'Stop hacking, hacker. Hacking is bad. Stop it. Please?';
 		}
 	}
 
-	public function makeForm($first, $last, $email){
+	public function makeForm($first, $last, $email, $type){
 		echo 'First Name: ' . $first . '</br>';
 		echo 'Last Name: ' . $last . '</br>';
 		echo 'Email: ' . $email . '</br></br>';
-		echo '<form method="post">';
+		echo '<form method="' . $type .'">';
 		echo ' 	<input type="hidden" name="index" value="' . $_REQUEST['index'] . '">';
 		echo ' 	First Name<input type="text" name="first" required><br/>';
 		echo '	Last Name<input type="text" name="last" required></br>';
 		echo '	Email<input type="text" name="email" required></br>';
 		echo ' 	<button type="submit" value="pageUpdate" name="page">Update</button>';
 		echo '</form></br>';
-		echo '<form method="post">';
+		echo '<form method="' . $type .'">';
 		echo ' 	<button type="submit" value="pageShow" name="page">Back to Records</button>';
 		echo '</form></br>';
-		echo '<form method="post">';
+		echo '<form method="' . $type .'">';
 		echo '	<input type="hidden" name="index" value="' . $_REQUEST['index'] . '">';
 		echo '	<input type="hidden" name="delete" value="true">';
 		echo ' 	<button type="submit" value="pageUpdate" name="page">Delete Record</button>';
@@ -64,7 +72,7 @@ class pageUpdate extends pageTemplate{
 
 	public function showDelete(){
 		echo 'item deleted';
-		echo '<form method="post">';
+		echo '<form method="' . $type .'">';
 		echo ' 	<button type="submit" value="pageAdd" name="page">Add Records</button>';
 		echo '	<button type="submit" value="pageShow" name="page">Check Results</button>';
 		echo '</form></br>';
