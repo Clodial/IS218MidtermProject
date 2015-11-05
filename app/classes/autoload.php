@@ -4,7 +4,7 @@ class autoload{
 
 	public static function load($class){
 
-		$filename = strtolower($class) . '.php';
+		$filename = $class . '.php';
 		$file = 'app/classes/' . $filename;
 		if(!file_exists($file)){
 			return false;
