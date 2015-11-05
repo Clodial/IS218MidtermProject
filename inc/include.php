@@ -1,10 +1,4 @@
 <?php
-require("app/classes/accountMaker.php");
-require("app/classes/person.php");
-require("app/classes/pageTemplate.php");
-require("app/classes/pageShow.php");
-require("app/classes/pageIndex.php");
-require("app/classes/pageAdd.php");
-require("app/classes/pageUpdate.php");
-require("app/classes/main.php");
+require_once('app/classes/autoload.php');
+spl_autoload_register('autoload::load');
 ?>

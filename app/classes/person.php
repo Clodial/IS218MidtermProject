@@ -1,5 +1,4 @@
 <?php
-
 class person{
 
 	private $index;
