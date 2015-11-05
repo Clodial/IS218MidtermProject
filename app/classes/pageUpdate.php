@@ -35,7 +35,7 @@ class pageUpdate extends pageTemplate{
 			if($i < $this->index){
 				echo 'Stop hacking, hacker. Hacking is bad. Stop it. Please?';
 				$this->showFail();
-			}else{
+			}else if(isset($_REQUEST['update']) && $_REQUEST['update'] == 'true'){
 				foreach($csvArray as $row=>$next){
 					if($next[0] == $this->index){
 						$this->first = $next[1];
@@ -44,8 +44,11 @@ class pageUpdate extends pageTemplate{
 					}
 				}
 				$this->makeForm($this->first, $this->last, $this->email, $type);
+			}else{
+				echo 'You really have to stop hacking';
+				$this->showFail();
 			}
-		}else if(isset($_REQUEST['first']) && isset($_REQUEST['last']) && isset($_REQUEST['email'])){
+		}else if((isset($_REQUEST['first']) && isset($_REQUEST['last']) && isset($_REQUEST['email'])) && (isset($_REQUEST['update']) && $_REQUEST['update'] == 'true')){
 			echo '<h3 class="jumbotron">Update Data</h3>';
 			if(isset($_REQUEST['index'])){
 				$locArray = array($_REQUEST['index'], $_REQUEST['first'], $_REQUEST['last'], $_REQUEST['email']);
@@ -73,6 +76,7 @@ class pageUpdate extends pageTemplate{
 		echo ' 	First Name<input type="text" name="first" required><br/>';
 		echo '	Last Name<input type="text" name="last" required></br>';
 		echo '	Email<input type="text" name="email" required></br>';
+		echo ' 	<input type="hidden" name="update" value="true"';
 		echo ' 	<button type="submit" value="pageUpdate" name="page">Update</button>';
 		echo '</form></br>';
 		echo '<form method="post">';
