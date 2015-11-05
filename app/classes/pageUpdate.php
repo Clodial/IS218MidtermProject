@@ -1,4 +1,7 @@
-<?php
+<?php 
+
+namespace app\classes;
+	
 class pageUpdate extends pageTemplate{
 
 	private $index;

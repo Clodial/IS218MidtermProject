@@ -1,4 +1,7 @@
-<?php
+<?php 
+
+namespace app\classes;
+
 class person{
 
 	private $index;

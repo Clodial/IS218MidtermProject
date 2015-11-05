@@ -1,4 +1,7 @@
-<?php
+<?php 
+
+namespace app\classes;
+
 abstract class pageTemplate{
 
 	private $csv = 'files/names.csv';

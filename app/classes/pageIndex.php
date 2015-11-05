@@ -1,4 +1,4 @@
-<?php 
+<?php namespace app\classes;
 class pageIndex extends pageTemplate{
 
 	/**

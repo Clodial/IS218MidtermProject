@@ -1,4 +1,5 @@
-<?php
+<?php 
+namespace app\classes;
 class main{
 
 	/**
@@ -14,11 +15,11 @@ class main{
 	*/
 	public function __construct(){
 
-		$page_request = 'pageShow';
+		$page_request = 'app\classes\\' .'pageShow';
 		
 		if(!empty($_REQUEST) && isset($_REQUEST['page'])){
 
-			$page_request = $_REQUEST['page'];
+			$page_request = 'app\classes\\' . $_REQUEST['page'];
 			
 		}
 

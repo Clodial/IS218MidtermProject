@@ -8,10 +8,10 @@
 <body>
 <div class="container">
 <?php
-
 include("inc/include.php"); 
+use app\classes as App;
 
-$main = new main();
+$main = new App\main();
 
 ?>
 </div>
