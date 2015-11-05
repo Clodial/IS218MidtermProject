@@ -11,7 +11,6 @@ class pageAdd extends pageTemplate{
 		$this->createBody('get');
 		$this->createFooter();
 	}	
-
 	/**
 	* @Overrides 	pageTemplate's post function
 	* @brief 	 	Creates the web application based on information
@@ -24,7 +23,8 @@ class pageAdd extends pageTemplate{
 	}	
 
 	/**
-	* @Override 
+	* @Override 	pageTemplate's createBody function
+	* @param 		$type -> the type of form method the program will use
 	*/
 	public function createBody($type){
 		echo '<h3 class="jumbotron">Add Data</h3>';

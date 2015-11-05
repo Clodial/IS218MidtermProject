@@ -10,28 +10,41 @@ class pageUpdate extends pageTemplate{
 	* @Overrides pageTemplate's post function
 	*/
 	public function get(){
+		$this->createHeader();
 		$this->createBody('get');
+		$this->createFooter();
 	}
 	/**
 	* @Overrides pageTemplate's post function
 	*/
 	public function post(){
+		$this->createHeader();
 		$this->createBody('post');
+		$this->createFooter();
 	}
 
 	public function createBody($type){
-		if(isset($_REQUEST['index']) && !isset($_REQUEST['delete']) && !isset($_REQUEST['first']) && !isset($_REQUEST['last']) && !isset($_REQUEST['email'])){
+		if(isset($_REQUEST['index'])){
 			echo '<h3 class="jumbotron">Update Data</h3>';
 			$this->index = $_REQUEST['index'];
 			$csvArray = $this->readCSV($this->getCSVFile());
+			$i = 0;
 			foreach($csvArray as $row=>$next){
-				if($next[0] == $this->index){
-					$this->first = $next[1];
-					$this->last = $next[2];
-					$this->email = $next[3];
-				}
+				$i += 1;
 			}
-			$this->makeForm($this->first, $this->last, $this->email, $type);
+			if($i < $this->index){
+				echo 'Stop hacking, hacker. Hacking is bad. Stop it. Please?';
+				$this->showFail();
+			}else{
+				foreach($csvArray as $row=>$next){
+					if($next[0] == $this->index){
+						$this->first = $next[1];
+						$this->last = $next[2];
+						$this->email = $next[3];
+					}
+				}
+				$this->makeForm($this->first, $this->last, $this->email, $type);
+			}
 		}else if(isset($_REQUEST['first']) && isset($_REQUEST['last']) && isset($_REQUEST['email'])){
 			echo '<h3 class="jumbotron">Update Data</h3>';
 			if(isset($_REQUEST['index'])){
@@ -45,7 +58,9 @@ class pageUpdate extends pageTemplate{
 			$this->deleteCSV($this->getCSVFile(), $this->index);
 			$this->showDelete($type);
 		}else{
+			echo '<h3 class="jumbotron">Update Data</h3>';
 			echo 'Stop hacking, hacker. Hacking is bad. Stop it. Please?';
+			$this->showFail();
 		}
 	}
 
@@ -76,6 +91,12 @@ class pageUpdate extends pageTemplate{
 		echo ' 	<button type="submit" value="pageAdd" name="page">Add Records</button>';
 		echo '	<button type="submit" value="pageShow" name="page">Check Results</button>';
 		echo '</form></br>';
+	}
+
+	public function showFail(){
+		echo '<form method="GET">';
+		echo ' 	<button type="submit" value="pageShow" name="page">Back to Main Menu</button>';
+		echo '</form>';
 	}
 	
 

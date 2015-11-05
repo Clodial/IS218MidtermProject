@@ -1,5 +1,5 @@
 <?php
-class pageTemplate{
+abstract class pageTemplate{
 
 	private $csv = 'files/names.csv';
 
