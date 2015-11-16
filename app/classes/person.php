@@ -20,6 +20,7 @@ class person{
 	public function setOpenButton(){
 		echo '<form class="hoverButton" method="post">';
 		echo '<input type="hidden" value="' . $this->index . '" name="index">';
+		echo '<input type="hidden" value="true" name="update">';
 		echo '<button type="submit" name="page" value="pageUpdate">';
 		echo '<div class="col-md-4"> First Name: ' . $this->first . '</div>';
 		echo '<div class="col-md-4"> Last Name: ' . $this->last . '</div>';

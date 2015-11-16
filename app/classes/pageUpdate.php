@@ -27,7 +27,7 @@ class pageUpdate extends pageTemplate{
 	}
 
 	public function createBody($type){
-		if(isset($_REQUEST['index'])){
+		if(isset($_REQUEST['index']) && !isset($_REQUEST['delete'])){
 			echo '<h3 class="jumbotron">Update Data</h3>';
 			$this->index = $_REQUEST['index'];
 			$csvArray = $this->readCSV($this->getCSVFile());
@@ -79,7 +79,7 @@ class pageUpdate extends pageTemplate{
 		echo ' 	First Name<input type="text" name="first" required><br/>';
 		echo '	Last Name<input type="text" name="last" required></br>';
 		echo '	Email<input type="text" name="email" required></br>';
-		echo ' 	<input type="hidden" name="update" value="true"';
+		echo ' 	<input type="hidden" name="update" value="true"></br>';
 		echo ' 	<button type="submit" value="pageUpdate" name="page">Update</button>';
 		echo '</form></br>';
 		echo '<form method="post">';
